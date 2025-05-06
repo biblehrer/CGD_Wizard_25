@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Wizard : MonoBehaviour
 {
+    public GameObject fireballPrefab;
 
     void Update()
     {
         Movement();
+        Casting();
     }
 
     private void Movement()
@@ -53,6 +56,15 @@ public class Wizard : MonoBehaviour
         }
         
         transform.position += movement * Time.deltaTime * 3;
+    }
+
+    private void Casting()
+    {        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 position = transform.position + new Vector3(0.9f,0.8f,0);
+            GameObject obj = Instantiate(fireballPrefab, position, Quaternion.identity);
+        }
     }
 
 
