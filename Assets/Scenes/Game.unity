@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 423191448}
   - component: {fileID: 423191452}
   - component: {fileID: 423191451}
+  - component: {fileID: 423191453}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Player
@@ -154,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746add85ca3d4c44fa1246d3bbf9ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 2809058941343738315, guid: 0f5d814cc1771de46914302a8ffcfa9c, type: 3}
 --- !u!212 &423191449
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -293,6 +295,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &423191453
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423191447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c778e0f1d49ded448e7d67b78f4b7db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4289913537829243889, guid: 0f5d814cc1771de46914302a8ffcfa9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.46
       objectReference: {fileID: 0}
     - target: {fileID: 4289913537829243889, guid: 0f5d814cc1771de46914302a8ffcfa9c, type: 3}
       propertyPath: m_LocalPosition.y

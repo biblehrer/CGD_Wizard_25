@@ -64,6 +64,7 @@ public class Wizard : MonoBehaviour
         {
             Vector3 position = transform.position + new Vector3(0.9f,0.8f,0);
             GameObject obj = Instantiate(fireballPrefab, position, Quaternion.identity);
+            obj.GetComponent<Fireball>().T();
         }
     }
 
