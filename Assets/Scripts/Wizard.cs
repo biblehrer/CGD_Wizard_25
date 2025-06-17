@@ -6,6 +6,18 @@ using UnityEngine.Rendering;
 public class Wizard : MonoBehaviour
 {
     public GameObject fireballPrefab;
+    private SpriteRenderer sR;
+    private Animator animator;
+    private float castingCooldown = 0;
+    private Vector3 lastDirection = Vector3.right;
+
+
+
+    void Start()
+    {
+        sR = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -19,7 +31,7 @@ public class Wizard : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            movement = movement + new Vector3(0,1,0);
+            movement = movement + new Vector3(0, 1, 0);
         }
 
         if (Input.GetKey(KeyCode.S))
@@ -54,18 +66,53 @@ public class Wizard : MonoBehaviour
         {
             movement.Normalize();
         }
-        
+
+        // Set the Animatior Values
+        if (movement.magnitude > 0)
+        {
+            lastDirection = movement;
+            animator.SetBool("walking", true);
+        }
+        else
+        {
+            animator.SetBool("walking", false);
+        }
+
+        // Flip the Player
+        if (movement.x > 0)
+        {
+            sR.flipX = false;
+        }
+        if (movement.x < 0)
+        {
+            sR.flipX = true;
+        }
+
+        // Actually move the Player
         transform.position += movement * Time.deltaTime * 3;
     }
 
     private void Casting()
-    {        
-        if (Input.GetKeyDown(KeyCode.Space))
+    {
+        animator.SetBool("attacking", false);
+        castingCooldown -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space) && castingCooldown <= 0)
         {
-            Vector3 position = transform.position + new Vector3(0.9f,0.8f,0);
-            GameObject obj = Instantiate(fireballPrefab, position, Quaternion.identity);
-            obj.GetComponent<Fireball>().T();
+            animator.SetBool("attacking", true);            
+            castingCooldown = 1;
         }
+    }
+
+    public void CreateFireball()
+    {
+        float x = 1;
+        if (sR.flipX)
+        {
+            x = -1;
+        }
+        Vector3 position = transform.position + new Vector3(x, 0.8f, 0);
+        GameObject obj = Instantiate(fireballPrefab, position, Quaternion.identity);
+        obj.GetComponent<Fireball>().direction = lastDirection;
     }
 
 
